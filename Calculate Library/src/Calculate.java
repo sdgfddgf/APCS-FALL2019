@@ -32,4 +32,45 @@ public class Calculate {
 	public static String foil (int a, int b, int c, int d, char n) {
 		return ((a*c)+"n^2+"+(a*d+b*c)+"n+"+(c*d));
 	}
+	public static int isDivisibleBy (int a, int b) {
+		return a/b;
+	}
+	public static double absValue (double number) {
+		if (number<0) {
+		return (number*-1);
+	}
+	else { 
+		return(number);
+		}
+	}
+	public static double max (double number1, double number2) {
+		if (number1<number2) {
+		return(number2);
+		}
+	else {
+		return (number1);
+		}
+	}
+	public static double max (double a, double b, double c) {
+			if (a>b && a>c) {
+				return (a);
+			}
+			else if (b>a && b>c) {
+				return (b);
+			}
+			else {
+				return (c);
+			}
+	}
+	public static int min (int a, int b) {
+		if (a>b) {
+			return (b);
+	}
+		else {
+			return (a);
+		}
+	}
+	public static double round2(double a) {
+		return (a-(a%0.01));
+		}
 }
