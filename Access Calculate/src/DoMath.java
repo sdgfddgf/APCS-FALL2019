@@ -22,5 +22,6 @@ public class DoMath {
 		System.out.println(Calculate.max(100,240,32));
 		System.out.println(Calculate.min(10,2));
 		System.out.println(Calculate.round2(18.8888888));
+		System.out.println(Calculate.exponent(3,0));
 	}
 }

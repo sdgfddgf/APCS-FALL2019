@@ -73,4 +73,12 @@ public class Calculate {
 	public static double round2(double a) {
 		return (a-(a%0.01));
 		}
+	public static double exponent (double b, int x) {
+		double result = 1.000;
+        while(x > 0){
+            result *= b;
+            x--;
+        }
+        return result;
+	}
 }
