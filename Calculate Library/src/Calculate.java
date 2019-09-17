@@ -81,4 +81,40 @@ public class Calculate {
         }
         return result;
 	}
+	public static int factorial (int n) {
+		int result=1;
+		if(n<0){
+		return -1;
+		}
+		if(n==0){
+		return 1;
+		}
+		for(int i =1;i<=n;i++){
+		result*=i;
+		}
+		return result;		
+	}
+	public static boolean isPrime (int x) {
+		boolean isPrime = true;
+        for(int i = 2 ; i < x ; i++){
+            if(x % i == 0){
+                isPrime = false;
+            }
+        }
+        return isPrime;
+	}
+	public static int gcf (int a,int b){
+		int temp=0;
+		if(a<b){
+			temp=b;
+			b=a;
+			a=temp;
+		} 
+		while(a%b!=0){
+			temp=a%b;
+			a=b;
+			b=temp;
+		}
+		return b;
+	}
 }
