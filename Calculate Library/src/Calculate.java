@@ -29,11 +29,14 @@ public class Calculate {
 	public static String toMixedNum (int Numberator, int Denominator) {
 		return (Numberator/Denominator) + "_" + (Numberator-(Numberator/Denominator)*Denominator) + "/" + Denominator;
 	}
-	public static String foil (int a, int b, int c, int d, char n) {
-		return ((a*c)+"n^2+"+(a*d+b*c)+"n+"+(c*d));
+	public static String foil (int a, int b, int c, int d, String n) {
+		return ((a*c)+"n^2+"+(a*d+b*c)+"n+"+(b*d));
 	}
-	public static int isDivisibleBy (int a, int b) {
-		return a/b;
+	public static boolean isDivisibleBy (int a, int b) {
+		if(b==0) {
+		throw new IllegalArgumentException("Do not accept 0");
+		}
+		return a%b==0;
 	}
 	public static double absValue (double number) {
 		if (number<0) {
@@ -52,15 +55,17 @@ public class Calculate {
 		}
 	}
 	public static double max (double a, double b, double c) {
+			double output = 0;
 			if (a>b && a>c) {
-				return (a);
+				return (output=a);
 			}
 			else if (b>a && b>c) {
-				return (b);
+				return (output=b);
 			}
-			else {
-				return (c);
+			else if (c>a && c>b){
+				return (output=c);
 			}
+			return output;
 	}
 	public static int min (int a, int b) {
 		if (a>b) {
@@ -71,10 +76,22 @@ public class Calculate {
 		}
 	}
 	public static double round2(double a) {
-		return (a-(a%0.01));
+		double b = 100*a;
+		a= (int) b;
+		double c= b-a;
+		if (c>=0.5) {
+			return (a+1)/100.0;
 		}
+		else {
+			return a/100.0;
+		}
+	}
 	public static double exponent (double b, int x) {
-		double result = 1.000;
+    	if(x<0)throw new IllegalArgumentException("Do not accept negative numbers");
+		if (x==0) {
+			return 1;
+		}
+    	double result = 1.000;
         while(x > 0){
             result *= b;
             x--;
@@ -82,6 +99,7 @@ public class Calculate {
         return result;
 	}
 	public static int factorial (int n) {
+    	if(n<0)throw new IllegalArgumentException("Could not have negative numbers");
 		int result=1;
 		if(n<0){
 		return -1;
@@ -104,17 +122,52 @@ public class Calculate {
         return isPrime;
 	}
 	public static int gcf (int a,int b){
-		int temp=0;
-		if(a<b){
-			temp=b;
-			b=a;
-			a=temp;
-		} 
-		while(a%b!=0){
-			temp=a%b;
-			a=b;
-			b=temp;
+
+		int result = 1;
+		for (int factor=2; factor<=a;factor++) {
+			boolean c = isDivisibleBy(a,factor);
+			boolean d = isDivisibleBy(b,factor);
+			if(c==true && d==true) {
+				 result = factor;
+			}
 		}
-		return b;
+		return result;
 	}
+	public static double sqrt (double x) {
+		if(x <0)throw new IllegalArgumentException("Could not have a negative square root");
+		double result= 1;
+		while (x-result*result>=0.005 || result*result-x>=0.005 ) {
+	    result = 0.5*(x/result+result);
+	    }
+		result= round2 (result);
+		 if (x==0){
+			return 0;
+		}
+		return result;
+    }
+	 public static String quadForm(double a, double b, double c){
+	    	//part 4
+	    	//uses the quadratic formula to approximate the real roots.
+	    	if((discriminant(a,b,c)>=0)) {
+	    		double posRt = round2((-b + sqrt(discriminant(a,b,c)))/-2/a);
+	    		double negRt = round2((-b - sqrt(discriminant(a,b,c)))/-2/a);
+	            double rt1st = posRt;
+	    		double rt2nd = posRt;
+	    		if(posRt != negRt) {
+	    		}
+	    		if(rt1st == posRt) {
+	    			rt2nd = negRt;
+	    		}
+	    		
+	    		if(rt1st > rt2nd) {
+	    			return rt2nd + "and" + rt1st;
+	    		}
+	    		else {
+	    			return rt1st + "and" + rt2nd;
+	    		}
+	    	}
+	    	else {
+	    		return "no real roots.";
+	    	}
+	    }
 }
